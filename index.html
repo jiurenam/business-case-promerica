@@ -281,14 +281,80 @@
     </section>
 
     <section class="section" id="agencias">
-      <div class="section-title">6. Agencias y red comercial</div>
-      <p class="section-note">La distribución por sucursal y segmentación estratégica permite identificar concentración de clientes por red comercial, segmentos prioritarios y oportunidades de trazabilidad comercial.</p>
-      <div class="callout"><strong>Nota operativa:</strong> existen clientes no asignados a sucursal específica y clasificados como SUCURSAL_CLIENTE_SEGMENTO. También existen clientes clasificados como SUCURSAL_OTRAS_CATEGORIAS por categorías como clientes planilla, comercialización retail o funcionarios del banco. Esta situación se deriva de cambios solicitados en agosto 2025, asociados a reclasificación de clientes, los cuales no han sido resueltos a la fecha.</div>
-      <div class="card" style="margin-top:16px;">
-        <div class="small-title">Distribución por variable / sucursal y segmentación estratégica</div>
-        <div class="table-wrap"><table id="agencias-table"></table></div>
+
+  <div class="section-title">
+    6. Agencias y red comercial
+  </div>
+
+  <p class="section-note">
+    La distribución comercial refleja concentración operativa en sucursales principales, una red de corresponsales no bancarios complementaria y un volumen importante de transacciones físicas mensuales.
+  </p>
+
+  <div class="grid-4" id="agencias-kpis"></div>
+
+  <div class="grid-2" style="margin-top:16px;">
+
+    <div class="card">
+
+      <div class="small-title">
+        Asesores promedio por sucursal
       </div>
-    </section>
+
+      <div class="table-wrap">
+        <table id="asesores-table"></table>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="small-title">
+        Top sucursales por transacciones físicas
+      </div>
+
+      <div class="bar-list" id="top-transacciones"></div>
+
+    </div>
+
+  </div>
+
+  <div class="grid-2" style="margin-top:16px;">
+
+    <div class="card">
+
+      <div class="small-title">
+        Corresponsales no bancarios
+      </div>
+
+      <div id="corresponsales-list"></div>
+
+    </div>
+
+    <div class="callout">
+
+      <strong>Nota operativa:</strong>
+
+      existen clientes no asignados a sucursal específica y clasificados como SUCURSAL_CLIENTE_SEGMENTO.
+
+      También existen clientes clasificados como SUCURSAL_OTRAS_CATEGORIAS derivado de reclasificaciones realizadas desde agosto 2025.
+
+    </div>
+
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+
+    <div class="small-title">
+      Distribución por variable / sucursal y segmentación estratégica
+    </div>
+
+    <div class="table-wrap">
+      <table id="agencias-table"></table>
+    </div>
+
+  </div>
+
+</section>
 
     <section class="section">
       <div class="section-title">Hallazgos estratégicos</div>
@@ -407,6 +473,109 @@ document.getElementById('churn-kpis').innerHTML=[kpiHTML('Churn mensual TC','0.2
 const asistencias=[['BOFA',16],['Fraude Digital',428],['Ingresos Protegidos',398],['Plan Protección Total',49994],['Protección Financiera TC',27087],['Seguro Protección TH',24813]].map(([categoria,valor])=>({categoria,valor}));
 bars('asistencias',asistencias);
 
+const asesores = [
+
+['Sucursal San José',8],
+['Sucursal Novacentro',6],
+['Sucursal Quepos',3],
+['Sucursal Heredia',7],
+['Sucursal Registro',3],
+['Sucursal San Francisco',6],
+['Sucursal Plaza del Sol',7],
+['Sucursal Alajuela',7],
+['Sucursal Cedral',9],
+['Sucursal Plaza Lincoln',7],
+['Sucursal Pérez Zeledón',4],
+['Sucursal Terrazas Lindora',4],
+['Sucursal Cartago',7],
+['Sucursal Ciudad Quesada',3],
+['Sucursal Liberia',6],
+['Sucursal Torre Universal',7],
+['Sucursal Al Este',3],
+['Sucursal Plaza Bratsi',4],
+['Sucursal Los Sueños',3],
+['Sucursal Pez Vela',3],
+['Kiosco Avenida Escazú',4],
+['Kiosko Universal Desamparados',1]
+
+];
+
+table(
+'asesores-table',
+['Sucursal','Asesores promedio'],
+asesores.map(r=>[
+r[0],
+fmt.format(r[1])
+])
+);
+
+const topTransacciones = [
+
+{categoria:'Sucursal Alajuela',valor:14078},
+{categoria:'Sucursal San José',valor:12914},
+{categoria:'Sucursal Novacentro',valor:12572},
+{categoria:'Sucursal El Cedral',valor:12083},
+{categoria:'Sucursal Cartago',valor:11256},
+{categoria:'Sucursal Heredia',valor:10532},
+{categoria:'Sucursal Lincoln Plaza',valor:10474},
+{categoria:'Sucursal San Francisco',valor:10258}
+
+];
+
+bars('top-transacciones',topTransacciones);
+
+document.getElementById('agencias-kpis').innerHTML=[
+
+kpiHTML(
+'Corresponsales no bancarios',
+'14',
+'Red complementaria'
+),
+
+kpiHTML(
+'Transacciones físicas promedio',
+'2,178',
+'Promedio mensual por sucursal'
+),
+
+kpiHTML(
+'Sucursal con más transacciones',
+'Sucursal Alajuela',
+'14,078 transacciones'
+),
+
+kpiHTML(
+'Mayor cantidad de asesores',
+'Sucursal Cedral',
+'9 asesores promedio'
+)
+
+].join('');
+
+const corresponsales=[
+
+'Universal Avenida Central',
+'Universal City Mall',
+'Universal Escazú Village',
+'Universal Liberia',
+'Universal Multicentro Desamparados',
+'Universal Multiplaza Escazú',
+'Universal Multiplaza Curridabat',
+'Universal Paseo Metrópoli',
+'Universal Plaza Bratsi',
+'Universal Plaza Lincoln',
+'Lego Plaza Lincoln',
+'Lego Oxígeno',
+'Lego Avenida Escazú',
+'Universal Mall Oxígeno'
+
+];
+
+document.getElementById('corresponsales-list').innerHTML =
+corresponsales.map(c=>
+`<span class="pill">${c}</span>`
+).join('');  
+  
 const agenciasText = `BANCA EMPRESAS|MASIVO|4754
 AGENCIA 710|MASIVO|3
 AGENCIA MARINA PEZ VELA|MASIVO|24
