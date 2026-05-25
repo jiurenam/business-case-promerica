@@ -735,7 +735,17 @@ TESORERIA|PRIORITARIO PLUS|16`;
 const agencias = agenciasText
 .split('\n')
 .map(line => line.split('|'))
-.sort((a,b)=>Number(b[2]) - Number(a[2]));
+.sort((a,b) => Number(b[2]) - Number(a[2]));
+
+table(
+'agencias-table',
+['Variable / Sucursal','Segmentación estratégica','Cantidad clientes'],
+agencias.map(r=>[
+r[0],
+r[1],
+fmt.format(Number(r[2]))
+])
+);
 </script>
 </body>
 </html>
