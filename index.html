@@ -732,8 +732,10 @@ SUCURSAL_OTRAS_CATEGORIAS|PRIORITARIO PLUS|2525
 BANCA PRIVADA|PRIORITARIO PLUS|1061
 SERVICIOS FINANCIEROS|PRIORITARIO PLUS|2
 TESORERIA|PRIORITARIO PLUS|16`;
-const agencias=agenciasText.split('\n').map(line=>line.split('|'));
-table('agencias-table',['Variable / Sucursal','Segmentación estratégica','Cantidad clientes'],agencias.map(r=>[r[0],r[1],fmt.format(Number(r[2]))]));
+const agencias = agenciasText
+.split('\n')
+.map(line => line.split('|'))
+.sort((a,b)=>Number(b[2]) - Number(a[2]));
 </script>
 </body>
 </html>
