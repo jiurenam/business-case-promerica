@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Case Estratégico | Promerica</title>
+  <style>
+    :root{
+      --verde:#166836;
+      --verde-2:#3f8f2f;
+      --verde-3:#6fae4f;
+      --verde-suave:#edf5ec;
+      --fondo:#ffffff;
+      --fondo-seccion:#f7f8f7;
+      --texto:#202833;
+      --texto-suave:#5f6368;
+      --borde:#edf0ec;
+      --shadow:0 4px 14px rgba(0,0,0,.05);
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:#f3f5f3;
+      font-family:"Segoe UI", Arial, sans-serif;
+      color:var(--texto);
+    }
+
+    .page{
+      width:min(1280px, calc(100% - 40px));
+      margin:24px auto 56px;
+    }
+
+    .hero{
+      background:linear-gradient(135deg,#ffffff 0%,#f7fbf6 100%);
+      border:1px solid var(--borde);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:34px 36px;
+      margin-bottom:20px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      right:-80px;
+      top:-80px;
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      background:rgba(22,104,54,.07);
+    }
+
+    .eyebrow{
+      font-size:12px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      color:var(--verde);
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:38px;
+      line-height:1.12;
+      margin:0 0 12px;
+      color:var(--texto);
+      max-width:850px;
+    }
+
+    .subtitle{
+      font-size:15px;
+      color:var(--texto-suave);
+      max-width:900px;
+      line-height:1.55;
+    }
+
+    .section{
+      background:#ffffff;
+      border:1px solid #f0f0f0;
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:24px;
+      margin-bottom:18px;
+    }
+
+    .section-title{
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      color:var(--verde);
+      margin-bottom:14px;
+    }
+
+    .section-note{
+      color:var(--texto-suave);
+      line-height:1.55;
+      font-size:14px;
+      margin:0 0 18px;
+    }
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+    .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+
+    .card{
+      background:var(--fondo-seccion);
+      border:1px solid var(--borde);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .kpi-label{
+      font-size:12px;
+      font-weight:800;
+      color:var(--texto-suave);
+      text-transform:uppercase;
+      letter-spacing:.4px;
+      margin-bottom:8px;
+    }
+
+    .kpi-value{
+      font-size:25px;
+      font-weight:800;
+      color:var(--texto);
+      line-height:1.1;
+    }
+
+    .kpi-sub{
+      color:var(--texto-suave);
+      font-size:12px;
+      margin-top:6px;
+      line-height:1.35;
+    }
+
+    .insight{
+      background:#ffffff;
+      border-left:5px solid var(--verde);
+      border-radius:14px;
+      padding:14px 16px;
+      box-shadow:0 2px 10px rgba(0,0,0,.035);
+      color:var(--texto-suave);
+      line-height:1.55;
+      font-size:14px;
+    }
+
+    .bar-list{display:flex;flex-direction:column;gap:11px;}
+    .bar-row{display:grid;grid-template-columns:170px 1fr 86px;gap:10px;align-items:center;}
+    .bar-label{font-size:13px;font-weight:700;color:var(--texto);}
+    .bar-track{height:10px;border-radius:999px;background:#e8eee6;overflow:hidden;}
+    .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--verde),var(--verde-3));}
+    .bar-value{text-align:right;font-size:13px;font-weight:800;color:var(--texto);}
+
+    table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:14px;overflow:hidden;}
+    th{background:#edf5ec;color:var(--verde);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:10px;}
+    td{padding:9px 10px;border-bottom:1px solid #eef1ee;color:var(--texto-suave);}
+    td strong{color:var(--texto);}
+    tr:last-child td{border-bottom:none;}
+
+    .table-wrap{max-height:430px;overflow:auto;border:1px solid var(--borde);border-radius:14px;background:#fff;}
+
+    .pill{
+      display:inline-block;
+      padding:5px 10px;
+      background:var(--verde-suave);
+      color:var(--verde);
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      margin:4px 6px 4px 0;
+    }
+
+    .small-title{font-size:15px;font-weight:800;color:var(--texto);margin:0 0 12px;}
+
+    .callout{
+      background:#fff9ec;
+      border:1px solid #f1dfb6;
+      border-left:5px solid #d6b24c;
+      border-radius:14px;
+      padding:14px 16px;
+      color:#6b5d38;
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .footer{
+      color:var(--texto-suave);
+      font-size:12px;
+      text-align:center;
+      padding:10px 0 20px;
+    }
+
+    @media print{
+      body{background:#fff;}
+      .page{width:100%;margin:0;}
+      .section,.hero{box-shadow:none;break-inside:avoid;}
+      .table-wrap{max-height:none;overflow:visible;}
+    }
+
+    @media(max-width:900px){
+      .grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr;}
+      .bar-row{grid-template-columns:1fr;gap:5px;}
+      .page{width:calc(100% - 24px);}
+      h1{font-size:30px;}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Información Caso de Negocio Promerica</div>
+      <h1>Business Case Estratégico de Clientes y Negocio Bancario</h1>
+      <div class="subtitle">Radiografía ejecutiva de la base de clientes, portafolio de productos, digitalización, segmentación, comportamiento y red comercial. El documento consolida todos los KPIs suministrados y los organiza con una narrativa estratégica para toma de decisiones.</div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Resumen ejecutivo</div>
+      <div class="grid-2">
+        <div class="insight">Promerica presenta una cartera con alta concentración en personas físicas, fuerte presencia urbana, adopción digital relevante y una combinación de base masiva con segmentos premium de alto valor.</div>
+        <div class="insight">El análisis evidencia oportunidades de profundización financiera, crecimiento digital, gestión por segmento, reactivación de productos y mejora en gobernanza de asignación comercial por sucursal.</div>
+      </div>
+    </section>
+
+    <section class="section" id="perfil">
+      <div class="section-title">1. Datos demográficos y perfil del cliente</div>
+      <p class="section-note">La base de clientes se concentra principalmente en personas físicas, con mayor presencia en rangos de edad económicamente activos, ubicación en la GAM y segmentos de ingresos bajos y medios.</p>
+      <div class="grid-4" id="perfil-kpis"></div>
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="card"><div class="small-title">Clientes únicos por categoría</div><div class="bar-list" id="clientes-categoria"></div></div>
+        <div class="card"><div class="small-title">Distribución por edad</div><div class="bar-list" id="edad"></div></div>
+        <div class="card"><div class="small-title">Distribución por género</div><div class="bar-list" id="genero"></div></div>
+        <div class="card"><div class="small-title">Promedio de productos</div><div class="bar-list" id="productos-promedio"></div></div>
+        <div class="card"><div class="small-title">Nivel socioeconómico</div><div class="bar-list" id="nse"></div></div>
+        <div class="card"><div class="small-title">Segmento por ingreso estimado</div><div class="bar-list" id="ingresos"></div></div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="small-title">Ubicación geográfica</div>
+        <div class="table-wrap"><table id="ubicacion-table"></table></div>
+      </div>
+    </section>
+
+    <section class="section" id="pasivos">
+      <div class="section-title">2. Portafolio de productos pasivos</div>
+      <p class="section-note">El portafolio pasivo refleja una base transaccional importante en cuentas de ahorro y monetarias, así como una concentración marcada de cuentas nómina en rangos de saldo bajo.</p>
+      <div class="grid-3" id="pasivos-kpis"></div>
+      <div class="grid-2" style="margin-top:16px;">
+        <div class="card"><div class="small-title">Cuentas ahorro / monetarias</div><div class="table-wrap"><table id="ahorro-table"></table></div></div>
+        <div class="card"><div class="small-title">Cuenta nómina por rango de saldo</div><div class="bar-list" id="nomina-rangos"></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="digital">
+      <div class="section-title">3. Penetración digital</div>
+      <p class="section-note">El canal móvil concentra el mayor volumen de interacción digital, complementado por tráfico web y un volumen transaccional mensual relevante.</p>
+      <div class="grid-4" id="digital-kpis"></div>
+      <div class="card" style="margin-top:16px;"><div class="small-title">Comparación de tráfico digital</div><div class="bar-list" id="trafico-digital"></div></div>
+    </section>
+
+    <section class="section" id="activos">
+      <div class="section-title">4. Portafolio de productos activos</div>
+      <p class="section-note">El portafolio activo combina una base relevante de tarjetas de crédito por clase con créditos hipotecarios, prendarios, personales y otros créditos, permitiendo visualizar ticket, plazo y profundidad financiera.</p>
+      <div class="grid-2">
+        <div class="card"><div class="small-title">Tarjetas de crédito por clase</div><div class="table-wrap"><table id="tarjetas-table"></table></div></div>
+        <div class="card"><div class="small-title">Grupos de crédito</div><div class="table-wrap"><table id="creditos-table"></table></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="segmentacion">
+      <div class="section-title">5. Segmentación y comportamiento</div>
+      <p class="section-note">La segmentación muestra una cartera de alto volumen en segmentos masivos, con valor de vida del cliente significativamente superior en segmentos corporativos, institucionales y prioritario plus.</p>
+      <div class="grid-2">
+        <div class="card"><div class="small-title">Segmentación operativa</div><div class="table-wrap"><table id="seg-operativa-table"></table></div></div>
+        <div class="card"><div class="small-title">Segmentación estratégica</div><div class="table-wrap"><table id="seg-estrategica-table"></table></div></div>
+        <div class="card"><div class="small-title">Segmentación cartera</div><div class="table-wrap"><table id="seg-cartera-table"></table></div></div>
+        <div class="card"><div class="small-title">Churn y asistencias</div><div class="grid-2" id="churn-kpis"></div><div style="margin-top:14px;" class="bar-list" id="asistencias"></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="agencias">
+      <div class="section-title">6. Agencias y red comercial</div>
+      <p class="section-note">La distribución por sucursal y segmentación estratégica permite identificar concentración de clientes por red comercial, segmentos prioritarios y oportunidades de trazabilidad comercial.</p>
+      <div class="callout"><strong>Nota operativa:</strong> existen clientes no asignados a sucursal específica y clasificados como SUCURSAL_CLIENTE_SEGMENTO. También existen clientes clasificados como SUCURSAL_OTRAS_CATEGORIAS por categorías como clientes planilla, comercialización retail o funcionarios del banco. Esta situación se deriva de cambios solicitados en agosto 2025, asociados a reclasificación de clientes, los cuales no han sido resueltos a la fecha.</div>
+      <div class="card" style="margin-top:16px;">
+        <div class="small-title">Distribución por variable / sucursal y segmentación estratégica</div>
+        <div class="table-wrap"><table id="agencias-table"></table></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Hallazgos estratégicos</div>
+      <div class="grid-3">
+        <div class="insight"><strong>Base masiva:</strong> la cartera se concentra en personas físicas y segmentos masivos, lo que sostiene volumen, penetración y oportunidad comercial.</div>
+        <div class="insight"><strong>Valor concentrado:</strong> los segmentos corporativos, institucionales y prioritario plus muestran un CLV promedio muy superior.</div>
+        <div class="insight"><strong>Digitalización:</strong> el tráfico de app supera ampliamente el tráfico web, posicionando el canal móvil como principal punto de interacción.</div>
+        <div class="insight"><strong>Productos activos:</strong> existe presencia relevante de tarjetas premium y créditos de alto saldo promedio.</div>
+        <div class="insight"><strong>Pasivos:</strong> las cuentas ahorro/monetarias reflejan una base transaccional amplia, con nómina concentrada en saldos bajos.</div>
+        <div class="insight"><strong>Gobernanza comercial:</strong> la reclasificación de clientes por sucursal representa una oportunidad de mejora en trazabilidad territorial.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Oportunidades estratégicas</div>
+      <div class="grid-2">
+        <div class="card"><div class="small-title">Profundización financiera</div><p class="section-note">Incrementar productos activos y pasivos en clientes con bajo promedio de productos activos, priorizando segmentos con mayor CLV.</p></div>
+        <div class="card"><div class="small-title">Estrategia digital first</div><p class="section-note">Capitalizar el alto tráfico de app para impulsar ofertas personalizadas, onboarding digital y migración transaccional.</p></div>
+        <div class="card"><div class="small-title">Premium banking</div><p class="section-note">Fortalecer propuestas para Prioritario Plus, Corporativa e Institucional por su alto valor de vida promedio.</p></div>
+        <div class="card"><div class="small-title">Gobernanza de sucursales</div><p class="section-note">Resolver la asignación de clientes en SUCURSAL_CLIENTE_SEGMENTO y SUCURSAL_OTRAS_CATEGORIAS para mejorar trazabilidad comercial.</p></div>
+      </div>
+    </section>
+
+    <div class="footer">Documento HTML ejecutivo generado con base en los KPIs suministrados.</div>
+  </main>
+
+<script>
+const fmt = new Intl.NumberFormat('es-CR');
+const money = n => '$' + fmt.format(Number(n).toFixed(2));
+const pct = n => (Number(n)*100).toFixed(2) + '%';
+const sum = arr => arr.reduce((a,b)=>a+Number(b.valor||b.VALOR||0),0);
+
+function kpiHTML(label,value,sub=''){
+  return `<div class="card"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div>${sub?`<div class="kpi-sub">${sub}</div>`:''}</div>`;
+}
+function bars(id,data,labelKey='categoria',valueKey='valor'){
+  const max = Math.max(...data.map(d=>Number(d[valueKey])));
+  document.getElementById(id).innerHTML = data.map(d=>{
+    const v=Number(d[valueKey]);
+    return `<div class="bar-row"><div class="bar-label">${d[labelKey]}</div><div class="bar-track"><div class="bar-fill" style="width:${max?((v/max)*100):0}%"></div></div><div class="bar-value">${fmt.format(v)}</div></div>`;
+  }).join('');
+}
+function table(id,headers,rows){
+  document.getElementById(id).innerHTML = `<thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>`;
+}
+
+const clientesCategoria=[
+  {categoria:'Corporativa',valor:937},{categoria:'Física',valor:236592},{categoria:'Institucional',valor:26},{categoria:'Jurídica',valor:11651},{categoria:'Pymes',valor:10688}
+];
+const edad=[
+  {categoria:'Menor 18',valor:11311},{categoria:'18-24',valor:14974},{categoria:'25-34',valor:57922},{categoria:'35-44',valor:66910},{categoria:'45-54',valor:47521},{categoria:'55-64',valor:31075},{categoria:'65+',valor:18530}
+];
+const genero=[{categoria:'Femenino',valor:107749},{categoria:'Masculino',valor:128843}];
+const nse=[0,1,2,3,4,5,6,7].map((c,i)=>({categoria:String(c),valor:[33305,128,2749,24412,51599,71996,36504,27550][i]}));
+const productosProm=[{categoria:'Productos activos',valor:1.5},{categoria:'Productos inactivos',valor:7.54}];
+const ingresos=[
+  ['Debajo de 500',86553],['500 a 1000',30496],['1000 a 2000',50239],['2000 a 3000',28222],['3000 a 4000',19445],['4000 a 5000',11912],['5000 a 6000',6940],['6000 a 7000',4357],['7000 a 8000',3012],['8000 a 9000',1900],['9000 a 10000',1224],['Más de 10000',3943]
+].map(([categoria,valor])=>({categoria,valor}));
+const ubicacion=[
+['(NO USAR) ISLAS VIRGENES',2],['ALAJUELA',38754],['ALEMANIA',10],['ARGENTINA',15],['BRASIL',1],['CANADA',15],['CARTAGO',26890],['CHILE',2],['CHINA',6],['COLOMBIA',64],['CUBA',2],['CURACAO',3],['ECUADOR',7],['EL SALVADOR',12],['ESPAÑA',13],['ESTADOS UNIDOS',99],['FRANCIA',1],['GUANACASTE',8147],['GUATEMALA',9],['HEREDIA',35066],['HOLANDA',1],['HONDURAS',6],['ISLAS CAYMAN',1],['ISRAEL',2],['ITALIA',3],['JAPON',1],['LIBANO',1],['LIMON',5287],['MEXICO',13],['ND',604],['NICARAGUA',248],['PANAMA',47],['PERU',8],['PUNTARENAS',11887],['REINO UNIDO (INGLATERRA)',2],['REPUBLICA DOMINICANA',2],['SAN JOSE',120986],['SUECIA',1],['SUIZA',3],['TAIWAN',2],['VENEZUELA',20]
+].map(([categoria,valor])=>({categoria,valor}));
+
+const totalClientes = sum(clientesCategoria);
+document.getElementById('perfil-kpis').innerHTML = [
+  kpiHTML('Clientes únicos',fmt.format(totalClientes),'Suma de categorías suministradas'),
+  kpiHTML('Personas físicas',fmt.format(236592),'Principal categoría de cliente'),
+  kpiHTML('Edad dominante','35-44','Mayor cantidad de clientes'),
+  kpiHTML('Ubicación principal','San José','120,986 clientes')
+].join('');
+bars('clientes-categoria',clientesCategoria); bars('edad',edad); bars('genero',genero); bars('productos-promedio',productosProm); bars('nse',nse); bars('ingresos',ingresos);
+table('ubicacion-table',['Ubicación','Cantidad clientes'],ubicacion.map(d=>[d.categoria,fmt.format(d.valor)]));
+
+const ahorro=[['Cantidad cuentas','162,558'],['Saldo promedio','$6,308.99'],['Frecuencia depósitos','8']];
+const nomina=[['0 - 499',59465],['500 - 999',3698],['1 000 - 4 999',3528],['5 000 - 9 999',600],['>= 10 000',606]].map(([categoria,valor])=>({categoria,valor}));
+document.getElementById('pasivos-kpis').innerHTML=[kpiHTML('Cuentas ahorro / monetarias','162,558'),kpiHTML('Saldo promedio','$6,308.99'),kpiHTML('Frecuencia depósitos','8')].join('');
+table('ahorro-table',['Métrica','Valor'],ahorro); bars('nomina-rangos',nomina);
+
+const digital=[
+  ['Clientes app/web',116456],['Tráfico mensual página',316940],['Tráfico mensual app',1429073],['Transacciones digitales promedio mensual',725867]
+];
+document.getElementById('digital-kpis').innerHTML=digital.map(([l,v])=>kpiHTML(l,fmt.format(v),l.includes('Transacciones')?'Promedio Ene26 - Abr26 / Incluye SMS':'')).join('');
+bars('trafico-digital',digital.slice(1,3).map(([categoria,valor])=>({categoria,valor})));
+
+const tarjetas=[
+['Black','Cantidad tarjetas','48,757'],['Black','Límite mínimo','$1'],['Black','Límite máximo','$150,000'],['Black','Límite promedio','$5,672.40'],
+['Clásica','Cantidad tarjetas','46,748'],['Clásica','Límite mínimo','$1'],['Clásica','Límite máximo','$21,150'],['Clásica','Límite promedio','$936.37'],
+['Infinite','Cantidad tarjetas','28,759'],['Infinite','Límite mínimo','$20'],['Infinite','Límite máximo','$80,000'],['Infinite','Límite promedio','$5,605.41'],
+['Oro','Cantidad tarjetas','62,760'],['Oro','Límite mínimo','$1'],['Oro','Límite máximo','$17,160'],['Oro','Límite promedio','$1,829.13'],
+['Platinum','Cantidad tarjetas','55,773'],['Platinum','Límite mínimo','$10'],['Platinum','Límite máximo','$25,000'],['Platinum','Límite promedio','$3,688.11']
+];
+const creditos=[
+['Prendario','Cantidad créditos','7,013'],['Prendario','Saldo insoluto promedio','$15,880.31'],['Prendario','Cuota promedio','$313.10'],['Prendario','Plazo promedio días','2,729.76'],['Prendario','Plazo máximo días','7,300'],
+['Hipotecario','Cantidad créditos','1,229'],['Hipotecario','Saldo insoluto promedio','$142,140.77'],['Hipotecario','Cuota promedio','$1,508.14'],['Hipotecario','Plazo promedio días','10,122.31'],['Hipotecario','Plazo máximo días','13,881'],
+['Consumo o personales','Cantidad créditos','5,866'],['Consumo o personales','Saldo insoluto promedio','$6,594.86'],['Consumo o personales','Cuota promedio','$189.68'],['Consumo o personales','Plazo promedio días','1,951.79'],['Consumo o personales','Plazo máximo días','2,925'],
+['Otros créditos','Cantidad créditos','3,815'],['Otros créditos','Saldo insoluto promedio','$320,149.74'],['Otros créditos','Cuota promedio','$151,755.83'],['Otros créditos','Plazo promedio días','1,683.91'],['Otros créditos','Plazo máximo días','10,956']
+];
+table('tarjetas-table',['Subcategoría','Métrica','Valor'],tarjetas); table('creditos-table',['Subcategoría','Métrica','Valor'],creditos);
+
+const segOperativa=[
+['Años Dorados',48956,1272.925933],['Corporativa',430,120268.5837],['Cosecha',11414,63.98405467],['Empresarial',883,125414.2854],['Familiar',66055,795.9149042],['Institucional',26,202686.1538],['Libertad',82731,618.2350147],['Mipyme',7637,3584.592772],['Persona-Pyme',27436,1163.66205],['Pyme',2675,9978.216075]
+];
+const segEstrategica=[['Masivo',110904,282.5934322],['Masivo Plus',72259,726.3532432],['Prioritario',40579,1765.701225],['Prioritario Plus',24501,10816.37423]];
+const segCartera=[['Corporativa',937,163305.7428],['Institucional',26,202686.1538],['Pymes',10688,5941.812032]];
+table('seg-operativa-table',['Categoría','Cantidad clientes','Promedio CLV'],segOperativa.map(r=>[r[0],fmt.format(r[1]),'$'+fmt.format(r[2].toFixed(2))]));
+table('seg-estrategica-table',['Categoría','Cantidad clientes','Promedio CLV'],segEstrategica.map(r=>[r[0],fmt.format(r[1]),'$'+fmt.format(r[2].toFixed(2))]));
+table('seg-cartera-table',['Categoría','Cantidad clientes','Promedio CLV'],segCartera.map(r=>[r[0],fmt.format(r[1]),'$'+fmt.format(r[2].toFixed(2))]));
+document.getElementById('churn-kpis').innerHTML=[kpiHTML('Churn mensual TC','0.24%','Abril 2026'),kpiHTML('Churn acumulado TC','1.67%','Año 2026')].join('');
+const asistencias=[['BOFA',16],['Fraude Digital',428],['Ingresos Protegidos',398],['Plan Protección Total',49994],['Protección Financiera TC',27087],['Seguro Protección TH',24813]].map(([categoria,valor])=>({categoria,valor}));
+bars('asistencias',asistencias);
+
+const agenciasText = `BANCA EMPRESAS|MASIVO|4754
+AGENCIA 710|MASIVO|3
+AGENCIA MARINA PEZ VELA|MASIVO|24
+KIOSCO AVENIDA ESCAZU|MASIVO|2
+KIOSCO EPA BELEN|MASIVO|1
+KIOSCO UNIVERSAL DESAMPARADOS|MASIVO|2
+SUCURSAL AL ESTE|MASIVO|11
+SUCURSAL ALAJUELA|MASIVO|453
+SUCURSAL CARTAGO|MASIVO|235
+SUCURSAL CEDRAL|MASIVO|356
+SUCURSAL CURRIDABAT PLAZA DEL SOL|MASIVO|392
+SUCURSAL CURRIDABAT REGISTRO|MASIVO|93
+SUCURSAL HEREDIA|MASIVO|568
+SUCURSAL LIBERIA|MASIVO|102
+SUCURSAL MARINA LOS SUEÑOS HERRADURA|MASIVO|65
+SUCURSAL NOVACENTRO|MASIVO|247
+SUCURSAL PAVAS|MASIVO|6097
+SUCURSAL PEREZ ZELEDON|MASIVO|90
+SUCURSAL PLAZA BRATSI|MASIVO|24
+SUCURSAL PLAZA LINCOLN|MASIVO|280
+SUCURSAL QUEPOS|MASIVO|117
+SUCURSAL SAN CARLOS|MASIVO|115
+SUCURSAL SAN FRANCISCO|MASIVO|228
+SUCURSAL SAN JOSE|MASIVO|362
+SUCURSAL TERRAZAS LINDORA|MASIVO|109
+SUCURSAL TORRE UNIVERSAL|MASIVO|498
+SUCURSAL_CLIENTE_SEGMENTO|MASIVO|80686
+SUCURSAL_OTRAS_CATEGORIAS|MASIVO|14200
+BANCA PRIVADA|MASIVO|783
+BANCA EMPRESAS|MASIVO PLUS|3127
+AGENCIA MARINA PEZ VELA|MASIVO PLUS|3
+KIOSCO EPA BELEN|MASIVO PLUS|1
+SUCURSAL AL ESTE|MASIVO PLUS|2
+SUCURSAL ALAJUELA|MASIVO PLUS|217
+SUCURSAL CARTAGO|MASIVO PLUS|72
+SUCURSAL CEDRAL|MASIVO PLUS|120
+SUCURSAL CURRIDABAT PLAZA DEL SOL|MASIVO PLUS|153
+SUCURSAL CURRIDABAT REGISTRO|MASIVO PLUS|37
+SUCURSAL HEREDIA|MASIVO PLUS|208
+SUCURSAL LIBERIA|MASIVO PLUS|44
+SUCURSAL MARINA LOS SUEÑOS HERRADURA|MASIVO PLUS|29
+SUCURSAL NOVACENTRO|MASIVO PLUS|109
+SUCURSAL PAVAS|MASIVO PLUS|5165
+SUCURSAL PEREZ ZELEDON|MASIVO PLUS|38
+SUCURSAL PLAZA BRATSI|MASIVO PLUS|16
+SUCURSAL PLAZA LINCOLN|MASIVO PLUS|111
+SUCURSAL QUEPOS|MASIVO PLUS|38
+SUCURSAL SAN CARLOS|MASIVO PLUS|34
+SUCURSAL SAN FRANCISCO|MASIVO PLUS|106
+SUCURSAL SAN JOSE|MASIVO PLUS|139
+SUCURSAL TERRAZAS LINDORA|MASIVO PLUS|46
+SUCURSAL TORRE UNIVERSAL|MASIVO PLUS|228
+SUCURSAL_CLIENTE_SEGMENTO|MASIVO PLUS|55553
+SUCURSAL_OTRAS_CATEGORIAS|MASIVO PLUS|5985
+BANCA PRIVADA|MASIVO PLUS|671
+TESORERIA|MASIVO PLUS|3
+BANCA EMPRESAS|PRIORITARIO|1820
+AGENCIA MARINA PEZ VELA|PRIORITARIO|1
+AGENCIA UNIVERSAL PLAZA DE LA CULTURA|PRIORITARIO|1
+SUCURSAL AL ESTE|PRIORITARIO|3
+SUCURSAL ALAJUELA|PRIORITARIO|149
+SUCURSAL CARTAGO|PRIORITARIO|111
+SUCURSAL CEDRAL|PRIORITARIO|125
+SUCURSAL CURRIDABAT PLAZA DEL SOL|PRIORITARIO|161
+SUCURSAL CURRIDABAT REGISTRO|PRIORITARIO|33
+SUCURSAL HEREDIA|PRIORITARIO|228
+SUCURSAL LIBERIA|PRIORITARIO|64
+SUCURSAL MARINA LOS SUEÑOS HERRADURA|PRIORITARIO|39
+SUCURSAL NOVACENTRO|PRIORITARIO|80
+SUCURSAL PAVAS|PRIORITARIO|3311
+SUCURSAL PEREZ ZELEDON|PRIORITARIO|27
+SUCURSAL PLAZA BRATSI|PRIORITARIO|14
+SUCURSAL PLAZA LINCOLN|PRIORITARIO|115
+SUCURSAL QUEPOS|PRIORITARIO|38
+SUCURSAL SAN CARLOS|PRIORITARIO|78
+SUCURSAL SAN FRANCISCO|PRIORITARIO|70
+SUCURSAL SAN JOSE|PRIORITARIO|122
+SUCURSAL TERRAZAS LINDORA|PRIORITARIO|55
+SUCURSAL TORRE UNIVERSAL|PRIORITARIO|138
+SUCURSAL_CLIENTE_SEGMENTO|PRIORITARIO|4415
+SUCURSAL_OTRAS_CATEGORIAS|PRIORITARIO|28917
+BANCA PRIVADA|PRIORITARIO|459
+TESORERIA|PRIORITARIO|4
+BANCA EMPRESAS|PRIORITARIO PLUS|909
+AGENCIA MARINA PEZ VELA|PRIORITARIO PLUS|5
+KIOSCO AVENIDA ESCAZU|PRIORITARIO PLUS|1
+SUCURSAL AL ESTE|PRIORITARIO PLUS|1
+SUCURSAL ALAJUELA|PRIORITARIO PLUS|1310
+SUCURSAL CARTAGO|PRIORITARIO PLUS|981
+SUCURSAL CEDRAL|PRIORITARIO PLUS|1538
+SUCURSAL CLIENTE CERO|PRIORITARIO PLUS|1
+SUCURSAL CURRIDABAT PLAZA DEL SOL|PRIORITARIO PLUS|1568
+SUCURSAL CURRIDABAT REGISTRO|PRIORITARIO PLUS|455
+SUCURSAL HEREDIA|PRIORITARIO PLUS|2227
+SUCURSAL LIBERIA|PRIORITARIO PLUS|415
+SUCURSAL MARINA LOS SUEÑOS HERRADURA|PRIORITARIO PLUS|492
+SUCURSAL NOVACENTRO|PRIORITARIO PLUS|976
+SUCURSAL PAVAS|PRIORITARIO PLUS|2615
+SUCURSAL PEREZ ZELEDON|PRIORITARIO PLUS|209
+SUCURSAL PLAZA BRATSI|PRIORITARIO PLUS|10
+SUCURSAL PLAZA LINCOLN|PRIORITARIO PLUS|1298
+SUCURSAL QUEPOS|PRIORITARIO PLUS|209
+SUCURSAL SAN CARLOS|PRIORITARIO PLUS|660
+SUCURSAL SAN FRANCISCO|PRIORITARIO PLUS|512
+SUCURSAL SAN JOSE|PRIORITARIO PLUS|992
+SUCURSAL TERRAZAS LINDORA|PRIORITARIO PLUS|833
+SUCURSAL TORRE UNIVERSAL|PRIORITARIO PLUS|819
+SUCURSAL_CLIENTE_SEGMENTO|PRIORITARIO PLUS|1858
+SUCURSAL_OTRAS_CATEGORIAS|PRIORITARIO PLUS|2525
+BANCA PRIVADA|PRIORITARIO PLUS|1061
+SERVICIOS FINANCIEROS|PRIORITARIO PLUS|2
+TESORERIA|PRIORITARIO PLUS|16`;
+const agencias=agenciasText.split('\n').map(line=>line.split('|'));
+table('agencias-table',['Variable / Sucursal','Segmentación estratégica','Cantidad clientes'],agencias.map(r=>[r[0],r[1],fmt.format(Number(r[2]))]));
+</script>
+</body>
+</html>
