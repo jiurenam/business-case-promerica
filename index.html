@@ -296,6 +296,17 @@
 
     <div class="card">
 
+  <div class="small-title">
+    Transacciones físicas por sucursal
+  </div>
+
+  <div class="table-wrap">
+    <table id="transacciones-table"></table>
+  </div>
+
+</div>
+    <div class="card">
+
       <div class="small-title">
         Asesores promedio por sucursal
       </div>
@@ -523,6 +534,39 @@ const topTransacciones = [
 ];
 
 bars('top-transacciones',topTransacciones);
+
+const transacciones = [
+
+['Sucursal Alajuela',14078],
+['Sucursal San José',12914],
+['Sucursal Novacentro',12572],
+['Sucursal El Cedral',12083],
+['Sucursal Cartago',11256],
+['Sucursal Heredia',10532],
+['Sucursal Lincoln Plaza',10474],
+['Sucursal San Francisco',10258],
+['Sucursal Curridabat Plaza del Sol',9563],
+['Sucursal Torre Universal',9072],
+['Sucursal Curridabat Registro',6648],
+['Sucursal Terrazas Lindora',7391],
+['Sucursal Liberia',4828],
+['Agencia Plaza Bratsi',8881],
+['Sucursal Pérez Zeledón',5425],
+['Sucursal Quepos',3816],
+['Sucursal Ciudad Quesada',3542],
+['Agencia Marina Pez Vela',4611],
+['Agencia Marina Los Sueños',3714]
+
+];
+
+table(
+'transacciones-table',
+['Sucursal','Total transacciones Ene-Abr 2026'],
+transacciones.map(r=>[
+r[0],
+fmt.format(r[1])
+])
+);
 
 document.getElementById('agencias-kpis').innerHTML=[
 
